@@ -110,14 +110,7 @@
                                 <div class="d-flex align-items-start mb-2">
                                     <span class="letra-badge">A</span>
                                     <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between">
-                                            <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1a_puntos" wire:model="alt1a_puntos" placeholder="Puntos" style="width: 100px;">
-
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="alt1a_correcta" wire:model.live="alt1a_correcta" wire:change="marcarAlternativaCorrecta('A')">
-                                                <label class="form-check-label" for="alt1a_correcta">Correcta</label>
-                                            </div>
-                                        </div>
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1a_puntos" wire:model="alt1a_puntos" placeholder="Puntos" style="width: 100px;">
                                         <textarea class="form-control" id="alt1a_texto" wire:model="alt1a_texto" rows="2" placeholder="Texto alternativa A..."></textarea>
                                     </div>
                                 </div>
@@ -127,14 +120,7 @@
                                 <div class="d-flex align-items-start mb-2">
                                     <span class="letra-badge">B</span>
                                     <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between">
-                                            <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1b_puntos" wire:model="alt1b_puntos" placeholder="Puntos" style="width: 100px;">
-
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="alt1b_correcta" wire:model.live="alt1b_correcta" wire:change="marcarAlternativaCorrecta('B')">
-                                                <label class="form-check-label" for="alt1b_correcta">Correcta</label>
-                                            </div>
-                                        </div>
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1b_puntos" wire:model="alt1b_puntos" placeholder="Puntos" style="width: 100px;">
                                         <textarea class="form-control" id="alt1b_texto" wire:model="alt1b_texto" rows="2" placeholder="Texto alternativa B..."></textarea>
                                     </div>
                                 </div>
@@ -144,14 +130,7 @@
                                 <div class="d-flex align-items-start mb-2">
                                     <span class="letra-badge">C</span>
                                     <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between">
-                                            <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1c_puntos" wire:model="alt1c_puntos" placeholder="Puntos" style="width: 100px;">
-
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="alt1c_correcta" wire:model.live="alt1c_correcta" wire:change="marcarAlternativaCorrecta('C')">
-                                                <label class="form-check-label" for="alt1c_correcta">Correcta</label>
-                                            </div>
-                                        </div>
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="alt1c_puntos" wire:model="alt1c_puntos" placeholder="Puntos" style="width: 100px;">
                                         <textarea class="form-control" id="alt1c_texto" wire:model="alt1c_texto" rows="2" placeholder="Texto alternativa C..."></textarea>
                                     </div>
                                 </div>
@@ -269,22 +248,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">A</span>
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2a_altA_puntos" wire:model="e2a_altA_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2a_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2a_altA_correcta"
-                                                       wire:model.live="e2a_altA_correcta"
-                                                       wire:change="setCorrectaE2('A','A')">
-                                                <label class="form-check-label" for="e2a_altA_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2a_altA_puntos" wire:model="e2a_altA_puntos" placeholder="puntaje">
+                                        @error('e2a_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2a_altA_texto" wire:model="e2a_altA_texto" rows="3" placeholder="Alternativa A"></textarea>
                                         @error('e2a_altA_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -292,20 +257,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">B</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2a_altB_puntos" wire:model="e2a_altB_puntos" placeholder="puntaje" style="width: 120px;">
-                                            @error('e2a_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2a_altB_correcta"
-                                                       wire:model.live="e2a_altB_correcta"
-                                                       wire:change="setCorrectaE2('A','B')">
-                                                <label class="form-check-label" for="e2a_altB_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2a_altB_puntos" wire:model="e2a_altB_puntos" placeholder="puntaje">
+                                        @error('e2a_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2a_altB_texto" wire:model="e2a_altB_texto" rows="3" placeholder="Alternativa B"></textarea>
                                         @error('e2a_altB_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -313,20 +266,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">C</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2a_altC_puntos" wire:model="e2a_altC_puntos" placeholder="puntaje" style="width: 120px;">
-                                            @error('e2a_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2a_altC_correcta"
-                                                       wire:model.live="e2a_altC_correcta"
-                                                       wire:change="setCorrectaE2('A','C')">
-                                                <label class="form-check-label" for="e2a_altC_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2a_altC_puntos" wire:model="e2a_altC_puntos" placeholder="puntaje">
+                                        @error('e2a_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2a_altC_texto" wire:model="e2a_altC_texto" rows="3" placeholder="Alternativa C"></textarea>
                                         @error('e2a_altC_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -353,7 +294,7 @@
 
                             {{-- =========================
                             ETAPA 3 - RAMAS (ESCENARIO A)
-                            ========================= --}}
+                           ========================= --}}
                             <div class="mt-4">
                                 <div class="alert alert-success">
                                     Configura a dónde irá el usuario según la alternativa que elija en esta Etapa 2.
@@ -404,56 +345,30 @@
                                                     @error("e3.$esc.$alt2.problema") <span class="message-error">{{ $message }}</span> @enderror
                                                 </div>
 
-                                                {{-- =========================
-                                                    ALTERNATIVAS ETAPA 3 (A,B,C) + CORRECTA
-                                                   ========================= --}}
                                                 <div class="row">
                                                     @foreach(['A','B','C'] as $l3)
                                                         <div class="col-md-4">
                                                             <div class="alternativa-box">
                                                                 <span class="letra-badge">{{ $l3 }}</span>
 
-                                                                {{-- PUNTAJE + SWITCH CORRECTA --}}
-                                                                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
-                                                                    <input type="text"
-                                                                           class="form-control form-control-sm"
-                                                                           onkeyup="validar_numeros(this.id)"
-                                                                           id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
-                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
-                                                                           placeholder="puntaje" style="width: 120px;">
-
-                                                                    <div class="form-check form-switch m-0">
-                                                                        <input class="form-check-input" type="checkbox" role="switch"
-                                                                               id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta"
-                                                                               wire:model.live="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.correcta"
-                                                                               wire:change="setCorrectaE3('{{ $esc }}','{{ $alt2 }}','{{ $l3 }}')">
-                                                                        <label class="form-check-label"
-                                                                               for="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta">
-                                                                            Correcta
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.puntos")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                <input type="text"
+                                                                       class="form-control form-control-sm mb-2"
+                                                                       onkeyup="validar_numeros(this.id)"
+                                                                       id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
+                                                                       wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
+                                                                       placeholder="puntaje">
+                                                                @error("e3.$esc.$alt2.alts.$l3.puntos") <span class="message-error">{{ $message }}</span> @enderror
 
                                                                 <textarea class="form-control"
                                                                           rows="3"
                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.texto"
                                                                           placeholder="Alternativa {{ $l3 }}"></textarea>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.texto")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                @error("e3.$esc.$alt2.alts.$l3.texto") <span class="message-error">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
 
-                                                {{-- =========================
-                                                    PREGUNTA ETAPA 3
-                                                   ========================= --}}
                                                 <div class="pregunta-section mt-3">
                                                     <label class="form-label fw-bold">Pregunta doctrinal (Etapa 3)</label>
 
@@ -485,11 +400,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         @endif
                                     </div>
                                 @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -545,75 +460,30 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">A</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2b_altA_puntos" wire:model="e2b_altA_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2b_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2b_altA_correcta"
-                                                       wire:model.live="e2b_altA_correcta"
-                                                       wire:change="setCorrectaE2('B','A')">
-                                                <label class="form-check-label" for="e2b_altA_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2b_altA_puntos" wire:model="e2b_altA_puntos" placeholder="puntaje">
+                                        @error('e2b_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2b_altA_texto" wire:model="e2b_altA_texto" rows="3" placeholder="Alternativa A"></textarea>
-                                         @error('e2b_altA_texto') <span class="message-error">{{ $message }}</span> @enderror
+                                        @error('e2b_altA_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <!-- B -->
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">B</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2b_altB_puntos" wire:model="e2b_altB_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2b_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2b_altB_correcta"
-                                                       wire:model.live="e2b_altB_correcta"
-                                                       wire:change="setCorrectaE2('B','B')">
-                                                <label class="form-check-label" for="e2b_altB_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2b_altB_puntos" wire:model="e2b_altB_puntos" placeholder="puntaje">
+                                        @error('e2b_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2b_altB_texto" wire:model="e2b_altB_texto" rows="3" placeholder="Alternativa B"></textarea>
-                                         @error('e2b_altB_texto') <span class="message-error">{{ $message }}</span> @enderror
+                                        @error('e2b_altB_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <!-- C -->
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">C</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2b_altC_puntos" wire:model="e2b_altC_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2b_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2b_altC_correcta"
-                                                       wire:model.live="e2b_altC_correcta"
-                                                       wire:change="setCorrectaE2('B','C')">
-                                                <label class="form-check-label" for="e2b_altC_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2b_altC_puntos" wire:model="e2b_altC_puntos" placeholder="puntaje">
+                                        @error('e2b_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2b_altC_texto" wire:model="e2b_altC_texto" rows="3" placeholder="Alternativa C"></textarea>
-                                         @error('e2b_altC_texto') <span class="message-error">{{ $message }}</span> @enderror
+                                        @error('e2b_altC_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -637,7 +507,7 @@
 
                             {{-- =========================
                             ETAPA 3 - RAMAS (ESCENARIO B)
-                            ========================= --}}
+                           ========================= --}}
                             <div class="mt-4">
                                 <div class="alert alert-success">
                                     Configura a dónde irá el usuario según la alternativa que elija en esta Etapa 2.
@@ -688,56 +558,30 @@
                                                     @error("e3.$esc.$alt2.problema") <span class="message-error">{{ $message }}</span> @enderror
                                                 </div>
 
-                                                {{-- =========================
-                                                    ALTERNATIVAS ETAPA 3 (A,B,C) + CORRECTA
-                                                   ========================= --}}
                                                 <div class="row">
                                                     @foreach(['A','B','C'] as $l3)
                                                         <div class="col-md-4">
                                                             <div class="alternativa-box">
                                                                 <span class="letra-badge">{{ $l3 }}</span>
 
-                                                                {{-- PUNTAJE + SWITCH CORRECTA --}}
-                                                                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
-                                                                    <input type="text"
-                                                                           class="form-control form-control-sm"
-                                                                           onkeyup="validar_numeros(this.id)"
-                                                                           id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
-                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
-                                                                           placeholder="puntaje" style="width: 120px;">
-
-                                                                    <div class="form-check form-switch m-0">
-                                                                        <input class="form-check-input" type="checkbox" role="switch"
-                                                                               id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta"
-                                                                               wire:model.live="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.correcta"
-                                                                               wire:change="setCorrectaE3('{{ $esc }}','{{ $alt2 }}','{{ $l3 }}')">
-                                                                        <label class="form-check-label"
-                                                                               for="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta">
-                                                                            Correcta
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.puntos")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                <input type="text"
+                                                                       class="form-control form-control-sm mb-2"
+                                                                       onkeyup="validar_numeros(this.id)"
+                                                                       id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
+                                                                       wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
+                                                                       placeholder="puntaje">
+                                                                @error("e3.$esc.$alt2.alts.$l3.puntos") <span class="message-error">{{ $message }}</span> @enderror
 
                                                                 <textarea class="form-control"
                                                                           rows="3"
                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.texto"
                                                                           placeholder="Alternativa {{ $l3 }}"></textarea>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.texto")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                @error("e3.$esc.$alt2.alts.$l3.texto") <span class="message-error">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
 
-                                                {{-- =========================
-                                                    PREGUNTA ETAPA 3
-                                                   ========================= --}}
                                                 <div class="pregunta-section mt-3">
                                                     <label class="form-label fw-bold">Pregunta doctrinal (Etapa 3)</label>
 
@@ -769,11 +613,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         @endif
                                     </div>
                                 @endforeach
+
                             </div>
 
                         </div>
@@ -831,23 +675,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">A</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2c_altA_puntos" wire:model="e2c_altA_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2c_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2c_altA_correcta"
-                                                       wire:model.live="e2c_altA_correcta"
-                                                       wire:change="setCorrectaE2('C','A')">
-                                                <label class="form-check-label" for="e2c_altA_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2c_altA_puntos" wire:model="e2c_altA_puntos" placeholder="puntaje">
+                                        @error('e2c_altA_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2c_altA_texto" wire:model="e2c_altA_texto" rows="3" placeholder="Alternativa A"></textarea>
                                         @error('e2c_altA_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -857,23 +686,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">B</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2c_altB_puntos" wire:model="e2c_altB_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2c_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2c_altB_correcta"
-                                                       wire:model.live="e2c_altB_correcta"
-                                                       wire:change="setCorrectaE2('C','B')">
-                                                <label class="form-check-label" for="e2c_altB_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2c_altB_puntos" wire:model="e2c_altB_puntos" placeholder="puntaje">
+                                        @error('e2c_altB_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2c_altB_texto" wire:model="e2c_altB_texto" rows="3" placeholder="Alternativa B"></textarea>
                                         @error('e2c_altB_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -883,23 +697,8 @@
                                 <div class="col-md-4">
                                     <div class="alternativa-box">
                                         <span class="letra-badge">C</span>
-
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <input type="text" class="form-control form-control-sm"
-                                                   onkeyup="validar_numeros(this.id)"
-                                                   id="e2c_altC_puntos" wire:model="e2c_altC_puntos"
-                                                   placeholder="puntaje" style="width: 120px;">
-                                            @error('e2c_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
-
-                                            <div class="form-check form-switch m-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                       id="e2c_altC_correcta"
-                                                       wire:model.live="e2c_altC_correcta"
-                                                       wire:change="setCorrectaE2('C','C')">
-                                                <label class="form-check-label" for="e2c_altC_correcta">Correcta</label>
-                                            </div>
-                                        </div>
-
+                                        <input type="text" class="form-control form-control-sm mb-2" onkeyup="validar_numeros(this.id)" id="e2c_altC_puntos" wire:model="e2c_altC_puntos" placeholder="puntaje">
+                                        @error('e2c_altC_puntos') <span class="message-error">{{ $message }}</span> @enderror
                                         <textarea class="form-control" id="e2c_altC_texto" wire:model="e2c_altC_texto" rows="3" placeholder="Alternativa C"></textarea>
                                         @error('e2c_altC_texto') <span class="message-error">{{ $message }}</span> @enderror
                                     </div>
@@ -926,7 +725,7 @@
 
                             {{-- =========================
                             ETAPA 3 - RAMAS (ESCENARIO C)
-                            ========================= --}}
+                           ========================= --}}
                             <div class="mt-4">
                                 <div class="alert alert-success">
                                     Configura a dónde irá el usuario según la alternativa que elija en esta Etapa 2.
@@ -963,7 +762,6 @@
                                         @if(!empty($e3_open[$esc][$alt2]))
                                             <div class="card-body">
 
-                                                {{-- TÍTULO --}}
                                                 <div class="mb-3">
                                                     <label class="form-label">Título Etapa 3</label>
                                                     <input type="text" class="form-control"
@@ -971,7 +769,6 @@
                                                     @error("e3.$esc.$alt2.titulo") <span class="message-error">{{ $message }}</span> @enderror
                                                 </div>
 
-                                                {{-- PROBLEMA --}}
                                                 <div class="mb-3">
                                                     <label class="form-label">Problema Etapa 3</label>
                                                     <textarea class="form-control" rows="3"
@@ -979,57 +776,30 @@
                                                     @error("e3.$esc.$alt2.problema") <span class="message-error">{{ $message }}</span> @enderror
                                                 </div>
 
-                                                {{-- =========================
-                                                    ALTERNATIVAS ETAPA 3 (A,B,C)
-                                                   ========================= --}}
                                                 <div class="row">
                                                     @foreach(['A','B','C'] as $l3)
                                                         <div class="col-md-4">
                                                             <div class="alternativa-box">
                                                                 <span class="letra-badge">{{ $l3 }}</span>
 
-                                                                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
-                                                                    <input type="text"
-                                                                           class="form-control form-control-sm"
-                                                                           onkeyup="validar_numeros(this.id)"
-                                                                           id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
-                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
-                                                                           placeholder="puntaje" style="width:120px;">
-
-                                                                    <div class="form-check form-switch m-0">
-                                                                        <input class="form-check-input"
-                                                                               type="checkbox"
-                                                                               role="switch"
-                                                                               id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta"
-                                                                               wire:model.live="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.correcta"
-                                                                               wire:change="setCorrectaE3('{{ $esc }}','{{ $alt2 }}','{{ $l3 }}')">
-                                                                        <label class="form-check-label"
-                                                                               for="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_correcta">
-                                                                            Correcta
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.puntos")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                <input type="text"
+                                                                       class="form-control form-control-sm mb-2"
+                                                                       onkeyup="validar_numeros(this.id)"
+                                                                       id="e3_{{ $esc }}_{{ $alt2 }}_{{ $l3 }}_puntos"
+                                                                       wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.puntos"
+                                                                       placeholder="puntaje">
+                                                                @error("e3.$esc.$alt2.alts.$l3.puntos") <span class="message-error">{{ $message }}</span> @enderror
 
                                                                 <textarea class="form-control"
                                                                           rows="3"
                                                                           wire:model="e3.{{ $esc }}.{{ $alt2 }}.alts.{{ $l3 }}.texto"
                                                                           placeholder="Alternativa {{ $l3 }}"></textarea>
-
-                                                                @error("e3.$esc.$alt2.alts.$l3.texto")
-                                                                <span class="message-error">{{ $message }}</span>
-                                                                @enderror
+                                                                @error("e3.$esc.$alt2.alts.$l3.texto") <span class="message-error">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
 
-                                                {{-- =========================
-                                                    PREGUNTA ETAPA 3
-                                                   ========================= --}}
                                                 <div class="pregunta-section mt-3">
                                                     <label class="form-label fw-bold">Pregunta doctrinal (Etapa 3)</label>
 
@@ -1061,11 +831,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         @endif
                                     </div>
                                 @endforeach
+
                             </div>
 
                         </div>

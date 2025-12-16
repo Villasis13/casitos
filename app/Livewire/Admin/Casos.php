@@ -109,10 +109,6 @@ class Casos extends Component{
         $this->pregunta1_texto = "";
         $this->pregunta1_clave = "";
         $this->pregunta1_puntos = "";
-
-        $this->alt1a_correcta = false;
-        $this->alt1b_correcta = false;
-        $this->alt1c_correcta = false;
     }
 
     public function edit_data($id){
@@ -164,10 +160,6 @@ class Casos extends Component{
                 $this->alt1c_puntos = $altC->alternativa_puntos;
                 $this->alt1c_texto  = $altC->alternativa_texto;
             }
-
-            $this->alt1a_correcta = $altA ? $altA->alternativa_correcta : false;
-            $this->alt1b_correcta = $altB ? $altB->alternativa_correcta : false;
-            $this->alt1c_correcta = $altC ? $altC->alternativa_correcta : false;
 
             // Cargar PREGUNTA de la etapa 1
             $pregunta = Pregunta::where('id_etapa', $etapa1->id_etapa)
@@ -239,18 +231,6 @@ class Casos extends Component{
             $this->logs->insertarLog($e);
             session()->flash('error', 'Ocurrió un error. Por favor, inténtelo nuevamente.');
         }
-    }
-
-    public function marcarAlternativaCorrecta($letra){
-        // resetea todas
-        $this->alt1a_correcta = false;
-        $this->alt1b_correcta = false;
-        $this->alt1c_correcta = false;
-
-        // activa solo la seleccionada
-        if ($letra === 'A') $this->alt1a_correcta = true;
-        if ($letra === 'B') $this->alt1b_correcta = true;
-        if ($letra === 'C') $this->alt1c_correcta = true;
     }
 
     public function save_casos(){
@@ -344,16 +324,6 @@ class Casos extends Component{
             $microtime = microtime(true);
             $mensajeSuccess = '';
 
-            $cantidadCorrectas = 0;
-            if ($this->alt1a_correcta) $cantidadCorrectas++;
-            if ($this->alt1b_correcta) $cantidadCorrectas++;
-            if ($this->alt1c_correcta) $cantidadCorrectas++;
-
-            if ($cantidadCorrectas !== 1) {
-                session()->flash('error_modal', 'Debe seleccionar exactamente 1 alternativa correcta.');
-                return;
-            }
-
             DB::beginTransaction();
 
             if (!$this->id_caso) { // CREAR
@@ -398,9 +368,9 @@ class Casos extends Component{
 
                 // ALTERNATIVAS ETAPA 1
                 $alternativas_data = [
-                    ['letra' => 'A', 'puntos' => $this->alt1a_puntos, 'texto' => $this->alt1a_texto, 'correcta' => $this->alt1a_correcta],
-                    ['letra' => 'B', 'puntos' => $this->alt1b_puntos, 'texto' => $this->alt1b_texto, 'correcta' => $this->alt1b_correcta],
-                    ['letra' => 'C', 'puntos' => $this->alt1c_puntos, 'texto' => $this->alt1c_texto, 'correcta' => $this->alt1c_correcta],
+                    ['letra' => 'A', 'puntos' => $this->alt1a_puntos, 'texto' => $this->alt1a_texto],
+                    ['letra' => 'B', 'puntos' => $this->alt1b_puntos, 'texto' => $this->alt1b_texto],
+                    ['letra' => 'C', 'puntos' => $this->alt1c_puntos, 'texto' => $this->alt1c_texto],
                 ];
 
                 foreach ($alternativas_data as $alt_data) {
@@ -412,7 +382,6 @@ class Casos extends Component{
                     $alternativa->alternativa_letra = $alt_data['letra'];
                     $alternativa->alternativa_texto = $alt_data['texto'];
                     $alternativa->alternativa_puntos = $alt_data['puntos'];
-                    $alternativa->alternativa_correcta = $alt_data['correcta'] ? 1 : 0;
                     $alternativa->alternativa_microtime = $microtime;
                     $alternativa->alternativa_estado = 1;
 
@@ -479,51 +448,38 @@ class Casos extends Component{
 
                     // ALTERNATIVAS (asumiendo siempre A, B, C en orden)
                     $alternativas = Alternativa::where('id_etapa', $etapa1->id_etapa)
-                        ->where('alternativa_estado', 1)
-                        ->get()
-                        ->keyBy('alternativa_letra');
+                        ->orderBy('id_alternativa', 'asc')
+                        ->get();
 
-                    if ($alternativas->isEmpty()) {
-                        DB::rollBack();
-                        session()->flash('error_modal', 'No se encontraron alternativas para actualizar.');
-                        return;
-                    }
-                    if (isset($alternativas['A'])) {
-                        $altA = $alternativas['A'];
-                        $altA->alternativa_texto = $this->alt1a_texto;
-                        $altA->alternativa_puntos = $this->alt1a_puntos;
-                        $altA->alternativa_correcta = $this->alt1a_correcta ? 1 : 0;
+                    if ($alternativas && $alternativas->count() >= 3) {
 
-                        if (!$altA->save()) {
+                        // A
+                        $alternativas[0]->alternativa_puntos = $this->alt1a_puntos;
+                        $alternativas[0]->alternativa_texto  = $this->alt1a_texto;
+                        if (!$alternativas[0]->save()) {
                             DB::rollBack();
                             session()->flash('error_modal', 'No se pudo actualizar la alternativa A.');
                             return;
                         }
-                    }
-                    if (isset($alternativas['B'])) {
-                        $altB = $alternativas['B'];
-                        $altB->alternativa_texto = $this->alt1b_texto;
-                        $altB->alternativa_puntos = $this->alt1b_puntos;
-                        $altB->alternativa_correcta = $this->alt1b_correcta ? 1 : 0;
 
-                        if (!$altB->save()) {
+                        // B
+                        $alternativas[1]->alternativa_puntos = $this->alt1b_puntos;
+                        $alternativas[1]->alternativa_texto  = $this->alt1b_texto;
+                        if (!$alternativas[1]->save()) {
                             DB::rollBack();
                             session()->flash('error_modal', 'No se pudo actualizar la alternativa B.');
                             return;
                         }
-                    }
 
-                    if (isset($alternativas['C'])) {
-                        $altC = $alternativas['C'];
-                        $altC->alternativa_texto = $this->alt1c_texto;
-                        $altC->alternativa_puntos = $this->alt1c_puntos;
-                        $altC->alternativa_correcta = $this->alt1c_correcta ? 1 : 0;
-
-                        if (!$altC->save()) {
+                        // C
+                        $alternativas[2]->alternativa_puntos = $this->alt1c_puntos;
+                        $alternativas[2]->alternativa_texto  = $this->alt1c_texto;
+                        if (!$alternativas[2]->save()) {
                             DB::rollBack();
                             session()->flash('error_modal', 'No se pudo actualizar la alternativa C.');
                             return;
                         }
+
                     }
 
                     // PREGUNTA
@@ -605,27 +561,11 @@ class Casos extends Component{
     public $e2c_pregunta_texto = '';
     public $e2c_pregunta_clave = '';
     public $e2c_pregunta_puntos = '';
-
-    // ===== CORRECTA ETAPA 2 (por escenario) =====
-    public $e2a_altA_correcta = false;
-    public $e2a_altB_correcta = false;
-    public $e2a_altC_correcta = false;
-
-    public $e2b_altA_correcta = false;
-    public $e2b_altB_correcta = false;
-    public $e2b_altC_correcta = false;
-
-    public $e2c_altA_correcta = false;
-    public $e2c_altB_correcta = false;
-    public $e2c_altC_correcta = false;
-
     // IDs de las etapas 2 por escenario (para editar)
     public $id_etapa2_a = null;
     public $id_etapa2_b = null;
     public $id_etapa2_c = null;
     public $modo_edicion_etapa2 = false;
-
-
     public $e3 = [];
     public $e3_open = [];
 
@@ -640,9 +580,9 @@ class Casos extends Component{
                     'titulo' => '',
                     'problema' => '',
                     'alts' => [
-                        'A' => ['puntos' => '', 'texto' => '', 'correcta' => false],
-                        'B' => ['puntos' => '', 'texto' => '', 'correcta' => false],
-                        'C' => ['puntos' => '', 'texto' => '', 'correcta' => false],
+                        'A' => ['puntos' => '', 'texto' => ''],
+                        'B' => ['puntos' => '', 'texto' => ''],
+                        'C' => ['puntos' => '', 'texto' => ''],
                     ],
                     'preg' => ['desc' => '', 'texto' => '', 'clave' => '', 'puntos' => ''],
                 ];
@@ -681,12 +621,6 @@ class Casos extends Component{
             $this->e2c_altA_correcta = ($letra === 'A');
             $this->e2c_altB_correcta = ($letra === 'B');
             $this->e2c_altC_correcta = ($letra === 'C');
-        }
-    }
-
-    public function setCorrectaE3($esc, $alt2, $letra){
-        foreach (['A','B','C'] as $l) {
-            $this->e3[$esc][$alt2]['alts'][$l]['correcta'] = ($l === $letra);
         }
     }
 
@@ -747,19 +681,6 @@ class Casos extends Component{
         $this->e2c_pregunta_texto = '';
         $this->e2c_pregunta_clave = '';
         $this->e2c_pregunta_puntos = '';
-
-        // correctas etapa 2
-        $this->e2a_altA_correcta = false;
-        $this->e2a_altB_correcta = false;
-        $this->e2a_altC_correcta = false;
-
-        $this->e2b_altA_correcta = false;
-        $this->e2b_altB_correcta = false;
-        $this->e2b_altC_correcta = false;
-
-        $this->e2c_altA_correcta = false;
-        $this->e2c_altB_correcta = false;
-        $this->e2c_altC_correcta = false;
 
         $this->initE3();
     }
@@ -829,17 +750,14 @@ class Casos extends Component{
                 if ($altA) {
                     $this->e2a_altA_puntos = $altA->alternativa_puntos;
                     $this->e2a_altA_texto  = $altA->alternativa_texto;
-                    $this->e2a_altA_correcta = ((int)$altA->alternativa_correcta === 1);
                 }
                 if ($altB) {
                     $this->e2a_altB_puntos = $altB->alternativa_puntos;
                     $this->e2a_altB_texto  = $altB->alternativa_texto;
-                    $this->e2a_altB_correcta = ((int)$altB->alternativa_correcta === 1);
                 }
                 if ($altC) {
                     $this->e2a_altC_puntos = $altC->alternativa_puntos;
                     $this->e2a_altC_texto  = $altC->alternativa_texto;
-                    $this->e2a_altC_correcta = ((int)$altC->alternativa_correcta === 1);
                 }
 
                 if ($pregunta) {
@@ -858,17 +776,14 @@ class Casos extends Component{
                 if ($altA) {
                     $this->e2b_altA_puntos = $altA->alternativa_puntos;
                     $this->e2b_altA_texto = $altA->alternativa_texto;
-                    $this->e2b_altA_correcta = ((int)$altA->alternativa_correcta === 1);
                 }
                 if ($altB) {
                     $this->e2b_altB_puntos = $altB->alternativa_puntos;
                     $this->e2b_altB_texto = $altB->alternativa_texto;
-                    $this->e2b_altB_correcta = ((int)$altB->alternativa_correcta === 1);
                 }
                 if ($altC) {
                     $this->e2b_altC_puntos = $altC->alternativa_puntos;
                     $this->e2b_altC_texto = $altC->alternativa_texto;
-                    $this->e2b_altC_correcta = ((int)$altC->alternativa_correcta === 1);
                 }
 
                 if ($pregunta) {
@@ -887,17 +802,14 @@ class Casos extends Component{
                 if ($altA) {
                     $this->e2c_altA_puntos = $altA->alternativa_puntos;
                     $this->e2c_altA_texto = $altA->alternativa_texto;
-                    $this->e2c_altA_correcta = ((int)$altA->alternativa_correcta === 1);
                 }
                 if ($altB) {
                     $this->e2c_altB_puntos = $altB->alternativa_puntos;
                     $this->e2c_altB_texto = $altB->alternativa_texto;
-                    $this->e2c_altB_correcta = ((int)$altB->alternativa_correcta === 1);
                 }
                 if ($altC) {
                     $this->e2c_altC_puntos = $altC->alternativa_puntos;
                     $this->e2c_altC_texto = $altC->alternativa_texto;
-                    $this->e2c_altC_correcta = ((int)$altC->alternativa_correcta === 1);
                 }
 
                 if ($pregunta) {
@@ -933,7 +845,7 @@ class Casos extends Component{
                 // Si no existe etapa3, no prendemos enabled
                 if (!$etapa3) continue;
 
-                // ✅ AHORA SÍ: esto hará que el switch salga marcado
+                // AHORA SÍ: esto hará que el switch salga marcado
                 $this->e3[$esc][$alt2]['enabled'] = true;
                 $this->e3_open[$esc][$alt2] = false;
 
@@ -950,7 +862,6 @@ class Casos extends Component{
 
                     $this->e3[$esc][$alt2]['alts'][$l3]['puntos'] = $alts3[$l3]->alternativa_puntos;
                     $this->e3[$esc][$alt2]['alts'][$l3]['texto']  = $alts3[$l3]->alternativa_texto;
-                    $this->e3[$esc][$alt2]['alts'][$l3]['correcta'] = ((int)$alts3[$l3]->alternativa_correcta === 1);
                 }
 
                 $preg3 = Pregunta::where('id_etapa', $etapa3->id_etapa)
@@ -1138,34 +1049,6 @@ class Casos extends Component{
             $microtime = microtime(true);
             $idUser    = Auth::id();
 
-            // ===== validar 1 correcta por escenario Etapa 2 =====
-            $cntA = (int)$this->e2a_altA_correcta + (int)$this->e2a_altB_correcta + (int)$this->e2a_altC_correcta;
-            $cntB = (int)$this->e2b_altA_correcta + (int)$this->e2b_altB_correcta + (int)$this->e2b_altC_correcta;
-            $cntC = (int)$this->e2c_altA_correcta + (int)$this->e2c_altB_correcta + (int)$this->e2c_altC_correcta;
-
-            if ($cntA !== 1 || $cntB !== 1 || $cntC !== 1) {
-                session()->flash('error_etapa_dos', 'Debe seleccionar exactamente 1 alternativa correcta por cada escenario (A, B y C).');
-                return;
-            }
-
-            // ===== validar 1 correcta por cada rama Etapa 3 enabled =====
-            foreach (['A','B','C'] as $esc) {
-                foreach (['A','B','C'] as $alt2) {
-                    if (empty($this->e3[$esc][$alt2]['enabled'])) continue;
-
-                    $c = 0;
-                    foreach (['A','B','C'] as $l3) {
-                        if (!empty($this->e3[$esc][$alt2]['alts'][$l3]['correcta'])) $c++;
-                    }
-
-                    if ($c !== 1) {
-                        session()->flash('error_etapa_dos', "En Etapa 3 ($esc-$alt2) debe seleccionar exactamente 1 alternativa correcta.");
-                        return;
-                    }
-                }
-            }
-
-
             $guardarEscenario = function ($letraEscenario) use ($idUser, $microtime) {
                 $idCaso = $this->id_caso_etapa2;
 
@@ -1270,18 +1153,9 @@ class Casos extends Component{
 
                 // 3) ALTERNATIVAS DEL ESCENARIO (A/B/C)
                 $alternativasEsc = [
-                    ['letra' => 'A', 'puntos' => $altA_puntos, 'texto' => $altA_texto, 'correcta' => (
-                    $letraEscenario === 'A' ? $this->e2a_altA_correcta :
-                        ($letraEscenario === 'B' ? $this->e2b_altA_correcta : $this->e2c_altA_correcta)
-                    )],
-                    ['letra' => 'B', 'puntos' => $altB_puntos, 'texto' => $altB_texto, 'correcta' => (
-                    $letraEscenario === 'A' ? $this->e2a_altB_correcta :
-                        ($letraEscenario === 'B' ? $this->e2b_altB_correcta : $this->e2c_altB_correcta)
-                    )],
-                    ['letra' => 'C', 'puntos' => $altC_puntos, 'texto' => $altC_texto, 'correcta' => (
-                    $letraEscenario === 'A' ? $this->e2a_altC_correcta :
-                        ($letraEscenario === 'B' ? $this->e2b_altC_correcta : $this->e2c_altC_correcta)
-                    )],
+                    ['letra' => 'A', 'puntos' => $altA_puntos, 'texto' => $altA_texto],
+                    ['letra' => 'B', 'puntos' => $altB_puntos, 'texto' => $altB_texto],
+                    ['letra' => 'C', 'puntos' => $altC_puntos, 'texto' => $altC_texto],
                 ];
 
                 foreach ($alternativasEsc as $altData) {
@@ -1302,7 +1176,6 @@ class Casos extends Component{
                     $alt->alternativa_letra     = $altData['letra'];
                     $alt->alternativa_texto     = $altData['texto'];
                     $alt->alternativa_puntos    = $altData['puntos'];
-                    $alt->alternativa_correcta = !empty($altData['correcta']) ? 1 : 0;
                     if (!$alt->exists) {
                         $alt->alternativa_microtime = $microtime;
                         $alt->alternativa_estado    = 1;
@@ -1426,7 +1299,6 @@ class Casos extends Component{
                         $alt3->alternativa_letra = $l3;
                         $alt3->alternativa_texto = $this->e3[$esc][$alt2]['alts'][$l3]['texto'];
                         $alt3->alternativa_puntos = $this->e3[$esc][$alt2]['alts'][$l3]['puntos'];
-                        $alt3->alternativa_correcta = !empty($this->e3[$esc][$alt2]['alts'][$l3]['correcta']) ? 1 : 0;
 
                         if (!$alt3->save()) {
                             DB::rollBack();
