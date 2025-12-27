@@ -4,7 +4,6 @@
             <div class="d-flex justify-content-center">
                 <div class="logo">
                     <a href="{{route('intranet')}}" class="d-flex align-items-center">
-                        <img src="{{asset('logoactual.png')}}" style="height: 50%;width: 50%" alt="Logo" srcset="">
                         <h2>Casitos</h2>
                     </a>
                 </div>

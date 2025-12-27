@@ -43,6 +43,7 @@ Route::prefix('Admin')->middleware('auth')->group(function () {
     route::get('/especialidades',[AdminController::class ,'especialidades'])->name('Admin.especialidades')->middleware('verifyUserStatus')->middleware('can:especialidades');
     route::get('/categorias',[AdminController::class ,'categorias'])->name('Admin.categorias')->middleware('verifyUserStatus')->middleware('can:categorias');
     route::get('/casos',[AdminController::class ,'casos'])->name('Admin.casos')->middleware('verifyUserStatus')->middleware('can:casos');
+    route::get('/etapas',[AdminController::class ,'etapas'])->name('Admin.etapas')->middleware('verifyUserStatus')->middleware('can:etapas');
 });
 /* ----------------------------- RUTAS FINALES DE ADMIN ---------------------------------*/
 

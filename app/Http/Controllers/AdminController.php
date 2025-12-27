@@ -7,17 +7,20 @@ use App\Models\Logs;
 use App\Models\Carrera;
 use App\Models\Especialidad;
 use App\Models\Categoria;
+use App\Models\Caso;
 
 class AdminController extends Controller{
     private $logs;
     private $carrera;
     private $especialidad;
     private $categoria;
+    private $caso;
     public function __construct(){
         $this->logs = new Logs();
         $this->carrera = new Carrera();
         $this->especialidad = new Especialidad();
         $this->categoria = new Categoria();
+        $this->caso = new Caso();
     }
 
     public function carreras(){
@@ -64,6 +67,20 @@ class AdminController extends Controller{
                 $informacion_categoria = $this->categoria->listar_categoria_x_id($id_categoria);
 
                 return view('admin.casos',compact('informacion_categoria'));
+            }
+        }catch (\Exception $e){
+            $this->logs->insertarLog($e);
+            return redirect()->route('intranet')->with('error', 'Ocurrió un error al intentar mostrar el contenido.');
+        }
+    }
+
+    public function etapas(){
+        try {
+            $id_caso = base64_decode($_GET['id_caso']);
+            if ($id_caso){
+                $informacion_caso = $this->caso->listar_caso_x_id($id_caso);
+
+                return view('admin.etapas',compact('informacion_caso'));
             }
         }catch (\Exception $e){
             $this->logs->insertarLog($e);

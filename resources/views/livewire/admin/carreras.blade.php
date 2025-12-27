@@ -40,9 +40,7 @@
                             </small>
                         </div>
 
-                        @error('carrera_descripcion')
-                        <span class="message-error">{{ $message }}</span>
-                        @enderror
+                        @error('carrera_descripcion')<span class="message-error">{{ $message }}</span>@enderror
                     </div>
 
                     {{-- REFERENCIA DE IMAGEN --}}
